@@ -1,9 +1,10 @@
 
 <hr>
 <footer style="color:white;">
+TELL: +256 789 982 2259/ +256 742512020.we are located in kampala-Equtorial mall
     <div class="row">
         <div class="col-md-6">
-           <p>Copyright © 2024 WANMIC TECH</p>
+           <p class="text-light">Copyright © 2024 WANMIC TECH</p>
               </div>
                 <div class="col-md-6 text-md-end">
                 <a href="#" class="text-light">Terms of Use</a>
@@ -11,4 +12,5 @@
            <a href="#" class="text-light">Privacy Policy</a>
        </div>
     </div>
+   
   </footer>

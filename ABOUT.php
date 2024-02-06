@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>forms</title>
+        <title>ABOUT US</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 
 
@@ -46,37 +46,33 @@
              ?>
           </div>
 
-<div class="container mt-3">
-    <div class="card img-fluid" style="width:5000px"> 
-        <img class="card-img-top" src="12.jpg" alt="jit ltd" style="width:100%">
-        <div class="card-img-overlay">
-    <div class="card-header">
-          <div class="card img-fluid" style="width:500px">
-    <img class="card-img-top" src="11.jpg" alt="Card image" style="width:100%">
-    <div class="card-img-overlay">
+          <div class="container-fluid p-5 bg-primary text-white text-center">
+  <h1>WANMIC TECHNOLOGIES </h1>
+  <p>we innovate technology</p> 
+</div>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-4">
+      <h3 style="color:white;">Work experience</h3>
+      <p style="color:white;">WANMIC Innovatitve Technologies is a multi-disciplinary firm comprised of Information Technology engineers who have been operating in Uganda for over 3 years. we are located in kampala-Equtorial mall</p>
+     
     </div>
-    <div class="card-body">
-        Jamachi Innovatitve Technologies is a multi-disciplinary firm comprised of Information Technology engineering who have been operating in Uganda for over 3 years. Our outstanding work has led to a large volume of repeat business through the years and continues to foster strong relationships with our clients and with professionals within the industry. With our diverse team, we bring together a range of professional expertise complementing municipal infrastructure and private land development projects. Our core capabilities focus on innovation, creativity, and cretical thinking.
-   </div>
-    <div class="card-footer">
-        Jamachi Innovatitve Technologies we innovate Technology.
+    <div class="col-sm-4">
+      <h3 style="color:white;">Services areas </h3>
+      <p style="color:white;">Our services are reacheble in Central, Northern, western, and Eastern,part of Uganda. We are looking forward to push our services in the entir country. </p>
+  
     </div>
-   </div>
-   </container>
+    <div class="col-sm-4">
+      <h3 style="color:white;">Relationship</h3>        
+      <p style="color:white;">Our outstanding work has led to a large volume of repeat business through the years and continues to foster strong relationships with our clients and with professionals within the industry.</p>
+     
+      <!-- <p style="color:white;">Mainframe computers</p> -->
+    </div>
+  </div>
+</div>
 
-   <!-- <div class="container mt-3">
-    <div class="spinner-grow text-muted"></div>
-   <div class="spinner-grow text-primary"></div>
-   <div class="spinner-grow text-success"></div>
-   <div class="spinner-grow text-info"></div>
-   <div class="spinner-grow text-warning"></div>
-   <div class="spinner-grow text-danger"></div>
-   <div class="spinner-grow text-secondary"></div>
-   <div class="spinner-grow text-dark"></div>
-   <div class="spinner-grow text-light"></div>
- </div>       -->
-
-
+  
 
 
 

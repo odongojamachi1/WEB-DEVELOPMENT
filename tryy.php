@@ -1,123 +1,126 @@
+<?php
+session_start();
+require_once "connect.php"; // Include your database connection file
+
+// Function to retrieve user records
+function retrieveRecords($connect) {
+    $records = array();
+    $query = "SELECT * FROM register";
+    $result = mysqli_query($connect, $query);
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $records[] = $row;
+        }
+    }
+    return $records;
+}
+
+// Function to update user record
+function updateRecord($connect, $UserName, $service, $phone, $amount) {
+    $query = "UPDATE register SET service='$service', phone='$phone', amount='$amount' WHERE UserName='$UserName'";
+    mysqli_query($connect, $query);
+}
+
+// Function to delete user record
+function deleteRecord($connect, $UserName) {
+    $query = "DELETE FROM register WHERE UserName='$UserName'";
+    mysqli_query($connect, $query);
+}
+
+// Check if the form for updating record is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
+    // Assuming UserName is the unique identifier for the user
+    $UserName = $_POST['UserName'];
+    $service = $_POST['service'];
+    $phone = $_POST['phone'];
+    $amount = $_POST['amount'];
+
+    updateRecord($connect, $UserName, $service, $phone, $amount);
+    header("Location: index.php?update=success");
+    exit();
+}
+
+// Check if the delete link is clicked
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['delete'])) {
+    // Assuming UserName is the unique identifier for the user
+    $UserName = $_GET['UserName'];
+    deleteRecord($connect, $UserName);
+    header("Location: register.php?delete=success");
+    exit();
+}
+
+// Retrieve records
+$records = retrieveRecords($connect);
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <title>WANMIC</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  
-<?php
-include "style.php";
-
-?>
-    
-
-<style>
-    <?php
-    include "navv.php";
-    ?> 
-</style>
-  
-
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>User Records</title>
+    <style>
+        body {
+            background-color: silver;
+        }
+    </style>
 </head>
+<body>
+<div class="container-fluid" style="max-height: 1000px; overflow: auto;">
+    <div class="row">
+        <div class="col-md-3 col-lg-2" style="border-left:2px solid white;">
+            <div class="col-lg-8 col-md-6 mt-2">
+                <h3 class="my-4 text-center">User Records</h3>
+                <?php
+                if (isset($_GET["update"]) && $_GET["update"] == "success") {
+                    echo '<div class="text-center alert alert-warning mt-3" role="alert">
+                                    Data updated successfully!
+                                </div>';
+                }
 
-<div class="row">
-        
-  
-        <?php
-             include "nav.php";
-             ?>
-          </div>
-  WANMIC INNOVATIVE SOLUTIONS
-</h1></center>
-
-
-    <div class="row"> 
-      
-        
-        <center>
-        <div id="flex-container">   
-            <div><div class="grid-container">
-                <div class="item1">
-                    <div id="demo" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-indicators">
-                          <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-                          <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-                          <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
-                        </div>
-                        
-                    <div class="container-fluid">
-                        <div class="carousel-inner">
-                          <div class="carousel-item active">
-                            <img src="40..png" alt="JAMACHI INNOVATIVE TECHNOLOGIES" class="d-block" style="width:100%">
-                            <div class="carousel-caption">
-                              <h3>WELCOME TO JAMACHI INOVATITVE TECHNOLOGIES</h3>
-                            WE INNOVATIVE TECHNOLOGY
-                            </div>
-                          </div>
-
-                    <div class="carousel-item">
-                 <img src="41.png" alt="Chicago" class="d-block" style="width:100%">
-             <div class="carousel-caption">
-          <h3>find a conducive learning environment  </h3>
-          with JIT LTD
-       </div> 
-      </div>
-
-            <div class="carousel-item">
-              <img src="11.jpg" alt="New York" class="d-block" style="width:100%">
-              <div class="carousel-caption">
-                <h3>JAMACHI INNOVATIVE TECHNOLOGIES</h3>
-                JAMACHI INNOVATIVE TECHNOLOGIES
-              </div>  
+                if (isset($_GET["delete"]) && $_GET["delete"] == "success") {
+                    echo '<div class="text-center alert alert-danger mt-3" role="alert">
+                                    Data deleted successfully!
+                                </div>';
+                }
+                ?>
             </div>
-          </div>
-          
- 
-         <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
-           <span class="carousel-control-prev-icon"></span>
-              </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
-                  <span class="carousel-control-next-icon"></span>
-                    </button>
-                   </div>
-                    </div>
-                  </div>     
-
-                </div>
-
+            <div class="row">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>UserName</th>
+                        <th>Service</th>
+                        <th>Phone</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($records as $record) { ?>
+                        <tr>
+                            <td><?php echo $record['UserName']; ?></td>
+                            <td><?php echo $record['service']; ?></td>
+                            <td><?php echo $record['phone']; ?></td>
+                            <td><?php echo $record['amount']; ?></td>
+                            <td>
+                                <form method="POST" action="index.php">
+                                    <input type="hidden" name="UserName" value="<?php echo $record['UserName']; ?>">
+                                    <input type="text" name="service" value="<?php echo $record['service']; ?>">
+                                    <input type="text" name="phone" value="<?php echo $record['phone']; ?>">
+                                    <input type="text" name="amount" value="<?php echo $record['amount']; ?>">
+                                    <button type="submit" name="update">Update</button>
+                                </form>
+                                <a href="index.php?delete&UserName=<?php echo $record['UserName']; ?>"
+                                   onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
             </div>
-          </div>
- 
-   
-
-
-
-          <?php
-
-include "foot.php";
-?>
-
-<p>
-<?php
-include "footer.php";
-?>
-
-
-
-<video id="video-background" autoplay loop muted>
-  <source src="72.mp4" type="video/mp4">
-
-
-
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- </ul>
-</div> -->
+        </div>
+    </div>
+</div>
 </body>
 </html>
